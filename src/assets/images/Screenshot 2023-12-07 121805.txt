@@ -1,0 +1,16 @@
+hi Andy Le I wonder if there is an
+issue with the tracking detalils
+notification email being sent to
+
+the customer when we fill out the
+AfterShip detalls and place the order
+in "Order In Transit" status...
+
+Based on Harshs estimate, its
+
+a 50/50 successful rate of end
+customers actually receiving the saïid
+email, which is very concerning to
+me!
+
+ls there a way to check? Ta

@@ -1,0 +1,38 @@
+
+ 
+input::placeholder {
+    color: red;
+}
+.content_wwo{
+    width: calc(100% - 40px);
+}
+.swiper-button-next,
+.swiper-button-prev {
+    background-color: white;
+    background-color: rgba(255, 255, 255, 0.5);
+    right:10px;
+    padding: 30px;
+    color: #000 !important;
+    fill: black !important;
+    stroke: black !important;
+}
+footer .contact-info-label {
+    display: block;
+    color: #fff;
+    font-weight: 400;
+    margin-bottom: 0;
+}
+footer .links li {
+    line-height: 2;
+}
+footer .tagcloud a {
+    padding: 0.64em 0.6em 0.56em;
+    margin: 0 0.4rem 0.8rem 0;
+    border: 1px solid #313438;
+    font-size: 11px;
+    background: transparent;
+    border-radius: 0;
+    font-weight: 400;
+    text-transform: capitalize;
+    display: inline-block;
+}
