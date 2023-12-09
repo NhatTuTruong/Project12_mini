@@ -55,7 +55,7 @@ const ListProduct: React.FC = () => {
                         }
                       }}
                     slidesPerView={4}
-                    navigation={{ clickable: true }}
+                    navigation
                 >
                     {
                         data && data.map((product: Product) => (

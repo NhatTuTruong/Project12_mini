@@ -21,7 +21,7 @@ const SubscribeForm = () => {
     const { register, handleSubmit, formState: { errors } } = useForm<FormData>({
         resolver: yupResolver(schema)
     });
-    const onSubmit = (data: FormData) => {
+    const onSubmit = () => {
         toast('You have successfully registered');
         setNameT('');
         setPhone('');
@@ -46,7 +46,7 @@ const SubscribeForm = () => {
                         <input type="email" {...register("email")} onChange={event => setEmail(event.target.value)} value={email} id="email" className="bg-gray-50 w-[100%] border border-gray-300 text-gray-900 text-sm rounded-sm py-[7px] focus:outline-none" placeholder="Your email address" />
                         <p className="text-sm text-gray-200 font-extralight">{errors.email?.message}</p>
                     </div>
-                    <Button className="text-white text-sm font-semibold bg-gray-303442 hover:bg-white hover:text-primary rounded-sm h-[35px] w-[180px] px-3" icon=<FaEnvelope /> value="Subscribe email list"></Button>
+                    <Button className="text-white text-sm font-semibold bg-gray-303442 hover:bg-white hover:text-primary rounded-sm h-[35px] w-[180px] px-3" icon={<FaEnvelope />} value="Subscribe email list"></Button>
                     <ToastContainer />
              
                 </form>

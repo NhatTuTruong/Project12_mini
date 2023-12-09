@@ -1,4 +1,4 @@
- import img1 from '../assets/images/8.jpg'
+
  import img2 from '../assets/images/slide1.webp'
  const banner = [
     {
