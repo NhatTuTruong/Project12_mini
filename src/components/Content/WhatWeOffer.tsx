@@ -1,22 +1,42 @@
 
 import CartWWO from "../UI/Cart/CardWWO"
 import Title from "../UI/Title"
-import offer from "../../data/offer"
+import { useState, useEffect } from 'react';
+import axios from 'axios';
+
+
 const WhatWeOffer = () => {
-  return (
-    <section className="bg-gray-f3f3f3 pb-12">
-        <Title text="What We Offer"></Title>
-        <div className="md:container md:mx-auto grid grid-cols-3 gap-6 max-sm:grid-cols-1 max-md:grid-cols-2 py-4 items-center">
-            {
-                offer && offer.map((item:any,index:number) => (
-                    <div key={index}>
-                        <CartWWO  data={item} ></CartWWO>
-                    </div>
-                ))
+    const [data, setData] = useState([]);
+    const [error, setError] = useState(null);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const response = await axios.get('http://localhost:8000/v1/matche/');
+                setData(response.data); // Đặt dữ liệu vào state
+                console.log(response.data);
+
+            } catch (error: any) {
+                setError(error);
             }
-        </div>
-    </section>
-  )
+        };
+
+        fetchData();
+    }, []); // Mảng rỗng [] có nghĩa là useEffect chỉ chạy một lần sau khi component được mount
+    return (
+        <section className="bg-gray-f3f3f3 pb-12">
+            <Title text="Các trận đấu diễn ra hôm nay"></Title>
+            <div className="grid-cols-1 sm:grid md:grid-cols-3">
+                {
+                    data && data.map((item: any, index: number) => (
+                        <div key={index}>
+                            <CartWWO data={item} ></CartWWO>
+                        </div>
+                    ))
+                }
+            </div>
+        </section>
+    )
 }
 
 export default WhatWeOffer

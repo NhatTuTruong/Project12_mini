@@ -6,7 +6,7 @@ const offer = [
         id : 113,
         title : 'Lighting Upgrades',
         short_content: 'Electrical panel maintenance, therefore, should be part of your regular routine.',
-        url_image: img1,
+        url_image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/Flag_of_Sweden.svg/120px-Flag_of_Sweden.svg.png',
         url_redirect: '#'
     },
     {

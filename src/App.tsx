@@ -8,6 +8,7 @@ import Category from "./pages/Category"
 import Product from "./pages/Product"
 import Login from "./pages/Login"
 import Customer from "./pages/Customer"
+import Register from "./pages/Register";
 import Error404 from "./pages/error/Error404"
 
 const queryClient = new QueryClient();
@@ -25,6 +26,7 @@ function App() {
               <Route path='products' element={<Product />} />
               <Route path='login' element={<Login />} />
               <Route path='customer' element={<Customer />} />
+              <Route path='register' element={<Register />} />
               <Route path="*" element={<Error404 />} />
             </Route>
           </Routes>

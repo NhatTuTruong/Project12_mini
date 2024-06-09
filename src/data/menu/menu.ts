@@ -1,29 +1,18 @@
 const menu = 
 [
 	{
-		name : 'Home',
+		name : 'Trận đấu hôm nay',
 		url : '/'
 	},
 	{
-		name : 'Blog',
+		name : 'Lịch thi đấu',
 		url : '/blog'
 	},
     {
-		name : 'Category',
+		name : 'Thống kê',
 		url : '/categories'
 	},
-    {
-		name : 'Product',
-		url : '/products'
-	},
-	{
-		name : 'Login ',
-		url : '/login'
-	},
-	{
-		name : 'Customer',
-		url : '/customer'
-	},
+
 ]
 
 export default menu;

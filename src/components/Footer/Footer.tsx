@@ -22,13 +22,13 @@ const Footer = () => {
 
 <footer className="bg-footer">
     <div className="mx-auto w-full max-w-screen-xl">
-      <div className="grid grid-cols-2 gap-8 px-4 py-6 lg:py-8 md:grid-cols-4 max-sm:grid-cols-1">
+      {/* <div className="grid grid-cols-2 gap-8 px-4 py-6 lg:py-8 md:grid-cols-4 max-sm:grid-cols-1">
         <Widget1 content={aboutUs}></Widget1>
         <Widget1 content={contactInfo}></Widget1>
         <Widget1 content={customerService}></Widget1>
         <Widget2 title ='POPPULAR TAGS' content={popularTags}></Widget2>
-    </div>
-    <div className="px-4 py-6 bg-footer  md:flex md:items-center md:justify-between border-t-[1px]">
+      </div> */}
+      <div className="px-4 py-6 bg-footer  md:flex md:items-center md:justify-between border-t-[1px]">
         <span className="text-sm text-white  sm:text-center">© Aptech eCommerce.<a href="https://flowbite.com/">2022</a>. All Rights Reserved.
         </span>
 
