@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import ListPredictionModal from "../Modal/ListPredictionModal";
+import { formatISO } from 'date-fns';
 
 const CardWWO = ({ data }: { data: any }) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -55,21 +56,36 @@ const CardWWO = ({ data }: { data: any }) => {
     const handlePredictionSubmit = async (prediction : any) => {
         const token = localStorage.getItem('token'); // Lấy JWT từ localStorage
         try {
-            await axios.post('http://localhost:8000/v1/prediction/', prediction, {
-            headers: {
-              Authorization: `Bearer ${token}`,
-              'Content-Type': 'application/json'
+            if(data.date >= formatISO(new Date())){
+                const response = await axios.post('http://localhost:8000/v1/prediction/', prediction, {
+                    headers: {
+                      Authorization: `Bearer ${token}`,
+                      'Content-Type': 'application/json'
+                    }
+                  });
+                  toast(response.data.message);
             }
-          });
-          toast('Cảm ơn bạn đã dự đoán tỉ số!')
+            else {
+                toast('Bạn không thể dự đoán tỉ số khi trận đấu đã bắt đầu');
+            }
         } catch (error : any) {
           toast(error.response ? error.response.data : error.message);
         }
     };
+    const CheckTime = () => {
+        let status: string = 'Dự đoán';
+        
+        if (data.date <= formatISO(new Date())) {
+            status = 'Đang diễn ra';
+        }else {
+            status = 'Dự đoán';
+        }
+        return status;;
+    }
     return (
         <>
             <div
-                className="mx-3 mt-6 flex flex-col self-start rounded-lg bg-white text-surface shadow-secondary-1 dark:bg-surface-dark dark:text-white sm:shrink-0 sm:grow sm:basis-0">
+                className="mx-3 mt-6 flex flex-col self-start rounded-lg bg-white text-surface shadow-secondary-1 dark:bg-surface-dark sm:shrink-0 sm:grow sm:basis-0">
                 <a href="#!" className="flex justify-center">
                     <center className="px-10 py-5">
                         <Image style='' src={data.flagTeamA} ></Image>
@@ -83,7 +99,7 @@ const CardWWO = ({ data }: { data: any }) => {
                 <div className="px-6">
                     <p className="mb-4 text-base text-center">Vòng bảng: <span className="font-semibold">{data.board}</span>, Thời gian diễn ra: {formatTime(data.date)}
                         <div className="sm:grid  md:grid-cols-3">
-                        <button type="button" onClick={handleOpenModal} className="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4  font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Dự đoán</button>
+                        <button type="button" onClick={handleOpenModal} className="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4  font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">{CheckTime()}</button>
                         <PredictionModal
                             isOpen={isModalOpen}
                             onClose={handleCloseModal}
