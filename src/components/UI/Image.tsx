@@ -8,7 +8,7 @@ const Image = ({style,src} : {style:string, src:string}) => {
     e.target.src = placeholderImage
   }
   return (
-    <img className={` ${style} w-auto h-[70px]`} src={src} alt={src} onError={onImageError}/>
+    <img className={` ${style} w-auto h-[70px] border border-slate-200`} src={src} alt={src} onError={onImageError}/>
   )
 }
 

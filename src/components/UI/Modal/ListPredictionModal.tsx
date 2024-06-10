@@ -1,87 +1,82 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 const ListPredictionModal = ({ isOpen, onClose, dataPredictionList }) => {
-    const formatTime = (isoDate: string) => {
-        // Tạo đối tượng Date từ chuỗi
+    const formatTime = (isoDate) => {
         const date = new Date(isoDate);
-
-        // Tạo formatter với `Intl.DateTimeFormat`
-        const options: any = {
+        const options = {
             day: '2-digit',
             month: '2-digit',
             year: 'numeric',
             hour: '2-digit',
             minute: '2-digit',
-            hour12: false, // Không sử dụng AM/PM
-            timeZone: 'UTC' // Nếu bạn muốn giữ thời gian theo UTC
+            hour12: false,
+            timeZone: 'UTC'
         };
         const formatter = new Intl.DateTimeFormat('vi-VN', options);
-
-        // Định dạng ngày giờ
         const formattedDate = formatter.format(date);
         return formattedDate;
     };
+    const avatarUrls = [
+        'https://publish-p47754-e237306.adobeaemcloud.com/adobe/dynamicmedia/deliver/dm-aid--914bcfe0-f610-4610-a77e-6ea53c53f630/_330603286208.app.png?preferwebp=true&width=312',
+        'https://img.a.transfermarkt.technology/portrait/big/28003-1710080339.jpg?lm=1',
+        'https://img.a.transfermarkt.technology/portrait/big/68290-1697056482.png?lm=1',
+        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQZdq8BpP8g-6ArJZxW8OqyLzWfeaIJIK-5Lw&s',
+        'https://img.a.transfermarkt.technology/portrait/big/602105-1680698738.jpg?lm=1',
+        'https://img.a.transfermarkt.technology/portrait/big/225083-1703279938.png?lm=1',
+        'https://static.bongda24h.vn/medias/original/2023/09/27/7-heung-min-son-2709141602.jpg',
+        'https://img.a.transfermarkt.technology/portrait/big/96341-1661780981.jpg?lm=1',
+
+
+
+        // Add other avatar URLs here
+    ];
+    const getRandomAvatarUrl = () => {
+        return avatarUrls[Math.floor(Math.random() * avatarUrls.length)];
+    };
+
     if (!isOpen) return null;
 
     return (
-        <div className="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50">
-            <div className="bg-white rounded-lg overflow-hidden shadow-lg max-w-md w-full">
-                <div className="px-6 py-4 border-b border-gray-200">
-                    <h3 className="text-lg font-medium text-gray-900">Danh sách dự đoán</h3>
+        <div className="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50 ">
+            <div className="bg-white rounded-lg overflow-hidden shadow-lg max-w-md max-w-3xl ">
+                <button type="button" onClick={onClose} className="px-4 py-2 bg-gray-300 rounded-md ml-96 mt-2">X</button>
+                <div className="relative overflow-x-auto">
+                    <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                        <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                            <tr>
+                                <th scope="col" className="px-6 py-3">
+                                    Tên
+                                </th>
+                                <th scope="col" className="px-6 py-3">
+                                    Ngày dự đoán
+                                </th>
+                                <th scope="col" className="px-6 py-3">
+                                    Kết quả dự đoán
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {dataPredictionList && dataPredictionList.map((item, index) => (
+                                <tr key={index} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                                        <td className="px-6 py-4 flex items-center">
+                                    <img
+                                        src={getRandomAvatarUrl()}
+                                        alt="Avatar"
+                                        className="h-8 w-8 rounded-full mr-2 object-cover object-center"
+                                    />
+                                    <span className="font-medium text-gray-900 whitespace-nowrap dark:text-white">{item.user.username}</span>
+                                </td>
+                                    <td className="px-6 py-4">
+                                        {formatTime(item.predictionDate)}
+                                    </td>
+                                    <td className="px-6 py-4">
+                                        {item.predictedScore.TeamAGoals} - {item.predictedScore.TeamBGoals}
+                                    </td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
                 </div>
-                <div
-                    className="relative flex w-100 flex-col  bg-white bg-clip-border text-gray-700"
-                >
-                    <div className="p-6">
-                        <div className="mb-4 flex items-center justify-between">
-                            <h5
-                                className="block font-sans text-xl font-semibold leading-snug tracking-normal text-blue-gray-900 antialiased"
-                            >
-                            
-                            </h5>
-                            <a
-                                href="#"
-                                className="block font-sans text-sm font-bold leading-normal text-blue-500 antialiased"
-                            >
-                            </a>
-                        </div>
-                        <div className="divide-y divide-gray-200">
-                            {
-                                dataPredictionList && dataPredictionList.map((item: any, index: number) => (
-                                    <div key={index}>
-                                        <div className="flex items-center justify-between pb-3 pt-3 last:pb-0">
-                                            <div className="flex items-center gap-x-3">
-                                                <img
-                                                    src="https://demos.creative-tim.com/test/corporate-ui-dashboard/assets/img/team-1.jpg"
-                                                    alt="Tania Andrew"
-                                                    className="relative inline-block h-9 w-9 rounded-full object-cover object-center"
-                                                />
-                                                <div>
-                                                    <h6
-                                                        className="block font-sans text-base font-semibold leading-relaxed tracking-normal text-blue-gray-900 antialiased"
-                                                    >
-                                                        {item.user.username}
-                                                    </h6>
-                                                    <p
-                                                        className="block font-sans text-sm font-light leading-normal text-gray-700 antialiased"
-                                                    >
-                                                        {formatTime(item.predictionDate)}
-                                                    </p>
-                                                </div>
-                                            </div>
-                                            <h6
-                                                className="block font-sans text-base font-semibold leading-relaxed tracking-normal text-blue-gray-900 antialiased"
-                                            >
-                                                {item.predictedScore.TeamAGoals} - {item.predictedScore.TeamBGoals}
-                                            </h6>
-                                        </div>
-                                    </div>
-                                ))
-                            }
-                        </div>
-                    </div>
-                </div>
-                <button type="button" onClick={onClose} className="px-4 py-2 bg-gray-300 rounded-md mr-2">Hủy</button>
             </div>
         </div>
     );
