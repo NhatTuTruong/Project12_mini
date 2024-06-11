@@ -7,13 +7,14 @@ export default {
   theme: {
     extend: {
       colors: {
-        'primary': '#e52e71',
+        'primary': '#00215E',
         'title' : '#303442',
         'gray-f3f3f3' : '#f3f3f3',
         'gray-303442' : '#303442',
         'red-d0021c' : '#d0021c',
         'footer' : '#222529',
-        'gray-a8a8a8' : '#a8a8a8'
+        'gray-a8a8a8' : '#a8a8a8',
+        'black' : "#000",
       },
     },
     container: {

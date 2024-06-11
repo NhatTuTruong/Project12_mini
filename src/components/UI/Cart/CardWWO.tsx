@@ -53,31 +53,32 @@ const CardWWO = ({ data }: { data: any }) => {
         const formattedDate = formatter.format(date);
         return formattedDate;
     };
-    const handlePredictionSubmit = async (prediction : any) => {
+    const handlePredictionSubmit = async (prediction: any) => {
         const token = localStorage.getItem('token'); // Lấy JWT từ localStorage
         try {
-            if(data.date >= formatISO(new Date())){
+            if (data.date >= formatISO(new Date())) {
                 const response = await axios.post('http://localhost:8000/v1/prediction/', prediction, {
                     headers: {
-                      Authorization: `Bearer ${token}`,
-                      'Content-Type': 'application/json'
+                        Authorization: `Bearer ${token}`,
+                        'Content-Type': 'application/json'
                     }
-                  });
-                  toast(response.data.message);
+                });
+              
+                toast(response.data.message);
             }
             else {
                 toast('Bạn không thể dự đoán tỉ số khi trận đấu đã bắt đầu');
             }
-        } catch (error : any) {
-          toast(error.response ? error.response.data : error.message);
+        } catch (error: any) {
+            toast(error.response ? error.response.data : error.message);
         }
     };
     const CheckTime = () => {
         let status: string = 'Dự đoán';
-        
+
         if (data.date <= formatISO(new Date())) {
             status = 'Đang diễn ra';
-        }else {
+        } else {
             status = 'Dự đoán';
         }
         return status;;
@@ -97,22 +98,23 @@ const CardWWO = ({ data }: { data: any }) => {
                     </center>
                 </a>
                 <div className="px-6">
-                    <p className="mb-4 text-base text-center">Vòng bảng: <span className="font-semibold">{data.board}</span>, Thời gian diễn ra: {formatTime(data.date)}
-                        <div className="sm:grid  md:grid-cols-3">
-                        <button type="button" onClick={handleOpenModal} className="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4  font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">{CheckTime()}</button>
-                        <PredictionModal
-                            isOpen={isModalOpen}
-                            onClose={handleCloseModal}
-                            dataMatche={data}
-                            onSubmit={handlePredictionSubmit}
-                        />
-                        <h5 className="mb-2 text-center text-3xl font-bold leading-tight">{data.score.awayGoals}-{data.score.homeGoals}</h5>
-                        <button type="button" onClick={handleOpenPredictionModal} className="text-white bg-yellow-400 hover:bg-yellow-500 focus:outline-none focus:ring-4  font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:focus:ring-yellow-900">Danh sách</button>
-                        <ListPredictionModal
-                            isOpen={isPredictionModalOpen}
-                            onClose={handleClosePredictionModal}
-                            dataPredictionList={dataPredictionList}
-                        />
+                    <p className="mb-4 text-base text-center">Vòng bảng: <span className="font-semibold">{data.board}</span>, Thời gian diễn ra: <span className="font-semibold">{formatTime(data.date)}</span>
+                        <div className="sm:grid  md:grid-cols-3 mt-4">
+                            <button type="button" onClick={handleOpenModal} className="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4  font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">{CheckTime()}</button>
+                            <PredictionModal
+                                isOpen={isModalOpen}
+                                onClose={handleCloseModal}
+                                dataMatche={data}
+                                onSubmit={handlePredictionSubmit}
+                            />
+
+                            <h5 className="mb-2 text-center text-3xl font-bold leading-tight">{data.score.homeGoals}-{data.score.awayGoals}</h5>
+                            <button type="button" onClick={handleOpenPredictionModal} className="text-white bg-black hover:bg-gray-500 focus:outline-none focus:ring-4  font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:focus:ring-yellow-900">Danh sách</button>
+                            <ListPredictionModal
+                                isOpen={isPredictionModalOpen}
+                                onClose={handleClosePredictionModal}
+                                dataPredictionList={dataPredictionList}
+                            />
                         </div>
                     </p>
                 </div>
