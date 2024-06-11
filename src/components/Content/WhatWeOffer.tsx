@@ -1,18 +1,21 @@
 
 import CartWWO from "../UI/Cart/CardWWO"
 import Title from "../UI/Title"
-import { useState, useEffect } from 'react';
+import React ,{ useState, useEffect } from 'react';
+import env from '../../../config/env'
 import axios from 'axios';
 
 
 const WhatWeOffer = () => {
     const [data, setData] = useState([]);
     const [error, setError] = useState(null);
-
+    const apiUrl = env.apiUrl;
+    console.log(apiUrl);
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get('http://localhost:8000/v1/matche/');
+                 
+                const response = await axios.get(`${apiUrl}/matche/`);
                 setData(response.data); // Đặt dữ liệu vào state
                 console.log(response.data);
 

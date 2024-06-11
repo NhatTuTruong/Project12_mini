@@ -64,7 +64,7 @@ const ListPredictionModal = ({ isOpen, onClose, dataPredictionList }) => {
                         </thead>
                         <tbody>
                             {dataPredictionList && dataPredictionList.map((item, index) => (
-                                <tr key={index} className={item.matchId.score.awayGoals == item.predictedScore.TeamAGoals ? "bg-black " :"bg-primary"}>
+                                <tr key={index} className=" bg-gray-800 border-white-700">
                                         <td className="px-6 py-4 flex items-center">
                                     <img
                                         src={getRandomAvatarUrl()}

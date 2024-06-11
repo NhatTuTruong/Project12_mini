@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import env from '../../config/env'
 
 const Login = () => {
   const [formData, setFormData] = useState({
@@ -15,10 +16,11 @@ const Login = () => {
 const handleChange = (e : any) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
 };
+const apiUrl = env.apiUrl;
 
 const handleLogin = async (data: any) => {
     try {
-        const response = await axios.post('http://localhost:8000/v1/users/login', data);
+        const response = await axios.post(`${apiUrl}/users/login/`, data );
         const { token, user } = response.data;
         console.log(response.data);
         

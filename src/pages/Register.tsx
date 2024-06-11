@@ -4,6 +4,8 @@ import React, { useState } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import axios from 'axios';
+import env from '../../config/env'
+
 const Register = () => {
     const [formData, setFormData] = useState({
         username: '',
@@ -14,11 +16,12 @@ const Register = () => {
     const handleChange = (e : any) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
     };
+    const apiUrl = env.apiUrl;
 
     const handleSubmit = async (e : any) => {
         e.preventDefault();
         try {
-            const response = await axios.post('http://localhost:8000/v1/users/register', formData);
+            const response = await axios.post(`${apiUrl}/users/register/`, formData);
             if(response.data.status){
                 toast(response.data.message);
             }

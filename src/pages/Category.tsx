@@ -1,8 +1,9 @@
+import SubscribeForm from "../components/UI/Form/SubscribeForm"
 
 
 const Category = () => {
   return (
-    <div>Category</div>
+    <div><SubscribeForm/></div>
   )
 }
 

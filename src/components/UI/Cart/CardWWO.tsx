@@ -6,12 +6,14 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import ListPredictionModal from "../Modal/ListPredictionModal";
 import { formatISO } from 'date-fns';
+import env from '../../../../config/env'
 
 const CardWWO = ({ data }: { data: any }) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [isPredictionModalOpen, setIsPredictionModalOpen] = useState(false);
     const [dataPredictionList, setdataPredictionList] = useState([]);
     const [error, setError] = useState(null);
+    const apiUrl = env.apiUrl;
 
     const handleOpenModal = () => setIsModalOpen(true);
     const handleCloseModal = () => setIsModalOpen(false);
@@ -22,7 +24,7 @@ const CardWWO = ({ data }: { data: any }) => {
         const fetchData = async () => {
             try {
                 let matchId = data._id;
-                const response = await axios.get('http://localhost:8000/v1/prediction/matches/' + matchId);
+                const response = await axios.get(`${apiUrl}/prediction/matches/${matchId}`  );
                 setdataPredictionList(response.data); // Đặt dữ liệu vào state
                 console.log(response.data);
 
@@ -57,7 +59,7 @@ const CardWWO = ({ data }: { data: any }) => {
         const token = localStorage.getItem('token'); // Lấy JWT từ localStorage
         try {
             if (data.date >= formatISO(new Date())) {
-                const response = await axios.post('http://localhost:8000/v1/prediction/', prediction, {
+                const response = await axios.post(`${apiUrl}/prediction/`, prediction, {
                     headers: {
                         Authorization: `Bearer ${token}`,
                         'Content-Type': 'application/json'
